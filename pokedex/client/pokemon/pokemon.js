@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { getPokemonInfo } from '../../common/methods';
 import getValueFromForm from '../common/get-value-input-field';
+import { pokemon } from '../../common/pokemon';
 import './pokemon.html';
 
 Template.pokemon.onCreated(function () {
@@ -16,6 +17,9 @@ Template.pokemon.helpers({
     },
     'loading': () => {
         return Template.instance().loading.get();
+    },
+    'pokemons': () => {
+        return pokemon.find().map(p => p.pokemon).sort((p1, p2) => +p1.id - (+p2.id));
     }
 });
 
@@ -26,7 +30,10 @@ Template.pokemon.events({
         const pokemonNumber = getValueFromForm('pokemon-number', evt);
         Meteor.call(getPokemonInfo, pokemonNumber, (e, result) => {
             template.pokemon.set(result);
-            template.loading.set(false);
+            setTimeout(function () {
+                template.loading.set(false);
+                $(`#pokemon-${pokemonNumber}`).get(0).scrollIntoView()
+            }, 1500);
         });
     }
 });

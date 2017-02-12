@@ -11,4 +11,27 @@
         <h1>Found pokemon: {{pokemon.name}}</h1>
         {{/if}}
     </div>
+    <div class="col-12">
+        <h1>Overview</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Number</td>
+                    <td>Name</td>
+                    <td>Weight</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each cachedpokemon in pokemons}}
+                <tr id="pokemon-{{cachedpokemon.id}}">
+                    <td><img src="https://github.com/PokeAPI/sprites/raw/master/sprites/pokemon/{{cachedpokemon.id}}.png" alt=""></td>
+                    <td>{{cachedpokemon.id}}</td>
+                    <td>{{cachedpokemon.name}}</td>
+                    <td>{{cachedpokemon.weight}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>

@@ -146,11 +146,29 @@ Meteor.call(getPokemonInfo, pokemonNumber, (e, result) => {
 
 
 # Persist
+```javascript
+// common
+import { Mongo } from 'meteor/mongo';
+
+export const pokemon = new Mongo.Collection('pokemon');
+
+// client do mongo queries as a reactive source
+pokemon.find().map(p => p.pokemon).sort((p1, p2) => +p1.id - (+p2.id));
+
+// server
+pokemon.upsert({ pokemonId }, { pokemonId, pokemon: JSON.parse(result.body) })
+```
+Note: Caching pokemon like its nothing mongo collections are reactive (open 2nd browser window)
+
+
+
+# Result
+![result](img/final.png) <!-- .element height="300" -->
 
 
 
 # Further leads:
-- Use react
+- React
 - Routing
 - GraphQL
 - [The meteor chef](https://themeteorchef.com/)
