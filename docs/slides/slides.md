@@ -39,7 +39,49 @@ Reactive pokedex using the free [pokemon api](https://pokeapi.co/).
 
 
 
-##### Tag along
+# Create app
+```shell
+meteor create pokedex
+cd pokedex
+meteor npm install
+meteor
+```
+![welcome](img/welcome-to-meteor.png) <!-- .element height="200" -->
+
+
+# Add packages
+```shell
+meteor npm i -S bootstrap@next request
+meteor add fourseven:scss
+```
+Note: We'll be using bootstrap and sass. Therefor we'll be installing some dependencies
+
+
+
+# Template [(Blaze)](http://blazejs.org/) <!-- .element target="_blank" -->
+```html
+<template name="pokemon">
+    <div class="col-12">
+        <form name="pokemon-search">
+            <input type="number" name="pokemon-number" required>
+            <button class="btn btn-primary" type="submit">Search poke</button>
+            <button class="btn btn-default" type="button" id="cache-all">Cache all</button>
+            {{#if loading}}
+            <div class="spinner"></div>
+            {{/if}}
+        </form>
+        {{#if pokemon}}
+        <h1>Found pokemon: {{pokemon.name}}</h1>
+        {{/if}}
+    </div>
+</template>
+<!-- render template -->
+{{>pokemon}}
+```
+Note: We're using blaze to create our templates
+
+
+# 
 
 
 
