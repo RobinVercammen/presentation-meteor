@@ -125,6 +125,30 @@ Note: Events are being used to capture user interaction. Mind the set on the rea
 
 
 
+# Server methods
+```javascript
+// server
+const methods = {};
+methods[getPokemonInfo] = (pokemonId, callback) => {
+  const httpget = Meteor.wrapAsync(request.get);
+  const result = httpget(`http://pokeapi.co/api/v2/pokemon/${pokemonId}`, {});
+  const parsedPokemon = JSON.parse(result.body)
+  return parsedPokemon;
+}
+Meteor.methods(methods);
+// client
+Meteor.call(getPokemonInfo, pokemonNumber, (e, result) => {
+    template.pokemon.set(result);
+    template.loading.set(false);
+});
+```
+
+
+
+# Persist
+
+
+
 # Further leads:
 - Use react
 - Routing
