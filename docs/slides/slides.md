@@ -81,7 +81,47 @@ Note: We'll be using bootstrap and sass. Therefor we'll be installing some depen
 Note: We're using blaze to create our templates
 
 
-# 
+# Lifecycle (onCreated)
+```javascript
+Template.pokemon.onCreated(function () {
+    this.pokemon = new ReactiveVar();
+    this.loading = new ReactiveVar(false);
+});
+```
+Note: Whenever a template is loaded it's onCreated method gets called before being 'drawn' to the screen. Here we'll do some initialization.
+Reactive Variables are meteor way to say, hey whenever this changes like someone needs it we need to rerun this function.
+
+
+# Helpers
+```javascript
+Template.pokemon.helpers({
+    'pokemon': () => {
+        return Template.instance().pokemon.get();
+    },
+    'loading': () => {
+        return Template.instance().loading.get();
+    }
+});
+```
+Note: Helpers are used to provide data to the template. Here we'll see the template calling the reactive variables. Be sure to understand why the Template.instance();
+
+
+# Events
+```javascript
+Template.pokemon.events({
+    'submit form[name="pokemon-search"]': (evt, template) => {
+        evt.preventDefault();
+        template.loading.set(true);
+        const pokemonNumber = getValueFromForm('pokemon-number', evt);
+
+        setTimeout(function () {
+            template.loading.set(false);
+            template.pokemon.set({ id: pokemonNumber, name: 'bulba' });
+        }, 1500);
+    }
+});
+```
+Note: Events are being used to capture user interaction. Mind the set on the reactive variable and see it update the screen
 
 
 
