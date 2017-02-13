@@ -47,6 +47,7 @@ meteor npm install
 meteor
 ```
 ![welcome](img/welcome-to-meteor.png) <!-- .element height="200" -->
+[Code](https://github.com/RobinVercammen/presentation-meteor/commit/30d6b43c51876d1fa9a939a1518a9fe2d35869bc) <!-- .element target="_blank" style="position:fixed; left:15px; bottom:15px;"-->
 
 
 # Add packages
@@ -78,6 +79,7 @@ Note: We'll be using bootstrap and sass. Therefor we'll be installing some depen
 <!-- render template -->
 {{>pokemon}}
 ```
+[Code](https://github.com/RobinVercammen/presentation-meteor/commit/9e03ce2bd404156bcdbabec91af419c33872b3fc) <!-- .element target="_blank" style="position:fixed; left:15px; bottom:15px;"-->
 Note: We're using blaze to create our templates
 
 
@@ -121,6 +123,7 @@ Template.pokemon.events({
     }
 });
 ```
+[Code](https://github.com/RobinVercammen/presentation-meteor/commit/45bd75276769469c39158129bdb7742250d9f3fb) <!-- .element target="_blank" style="position:fixed; left:15px; bottom:15px;"-->
 Note: Events are being used to capture user interaction. Mind the set on the reactive variable and see it update the screen
 
 
@@ -142,6 +145,7 @@ Meteor.call(getPokemonInfo, pokemonNumber, (e, result) => {
     template.loading.set(false);
 });
 ```
+[Code](https://github.com/RobinVercammen/presentation-meteor/commit/f421b5eacf3e958c59cb0fac3f2f9e210f6babba)<!-- .element target="_blank" style="position:fixed; left:15px; bottom:15px;"-->
 
 
 
@@ -158,6 +162,7 @@ pokemon.find().map(p => p.pokemon).sort((p1, p2) => +p1.id - (+p2.id));
 // server
 pokemon.upsert({ pokemonId }, { pokemonId, pokemon: JSON.parse(result.body) })
 ```
+[Code](https://github.com/RobinVercammen/presentation-meteor/commit/50e991d151501d09ef8c60edb37f3b364bc72144)<!-- .element target="_blank" style="position:fixed; left:15px; bottom:15px;"-->
 Note: Caching pokemon like its nothing mongo collections are reactive (open 2nd browser window)
 
 
